@@ -3,16 +3,17 @@ package com.codecool.miniuserapi.assigment.Model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Mini_user_list")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
 
     @Column(unique = true, nullable = false)
     private String userName;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String userEmail;
 
     @Column(unique = true, nullable = false)
@@ -21,12 +22,12 @@ public class User {
     @Column(nullable = false)
     private String userRole;
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
