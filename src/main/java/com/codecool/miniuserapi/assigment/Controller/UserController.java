@@ -34,13 +34,12 @@ public class UserController {
 
     @CrossOrigin("http://localhost:3000")
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public ResponseEntity<Map<String, String>> registerUser(@RequestBody Map<String, String> data){
-        System.out.println("Registration for: " + data.get("userName"));
+    public ResponseEntity<List<User>> registerUser(@RequestBody Map<String, String> data){
         String newUserUserName = data.get("userName");
         String newUserEMail = data.get("userEmail");
         String newUserPassword = data.get("password");
         userService.registerUser(newUserUserName, newUserEMail, newUserPassword,"Guest");
-        return new ResponseEntity<>(data, HttpStatus.OK);
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @CrossOrigin("http://localhost:3000")
