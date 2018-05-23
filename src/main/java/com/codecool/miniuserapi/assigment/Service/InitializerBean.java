@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitializerBean {
 
-    public InitializerBean(UserRepository userRepository) {
+    public InitializerBean(UserService userService) {
 
-        User testUser1 = new User("Test1", "test@mail.com", "123", "Guest");
+        userService.registerUser("TestAdmin","testAdmin@mail.com","321", "Admin");
+        userService.registerUser("Test1","test1@mail.com","123", "Guest");
 
-        userRepository.save(testUser1);
     }
 
 
