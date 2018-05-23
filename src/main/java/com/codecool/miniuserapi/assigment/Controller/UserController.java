@@ -2,14 +2,13 @@ package com.codecool.miniuserapi.assigment.Controller;
 
 import com.codecool.miniuserapi.assigment.Model.User;
 import com.codecool.miniuserapi.assigment.Service.UserService;
-import org.codehaus.groovy.runtime.StringGroovyMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -42,5 +41,27 @@ public class UserController {
         String newUserPassword = data.get("password");
         userService.registerUser(newUserUserName, newUserEMail, newUserPassword,"Guest");
         return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> allUsers;
+        allUsers = userService.getAllUsers();
+        if (allUsers == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(allUsers, HttpStatus.OK);
+        }
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @RequestMapping(value = "/delete_user/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> deleteUser(@PathVariable(value = "id") int id){
+        if (userService.deleteUser(id)) {
+            return new ResponseEntity<>("OK", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

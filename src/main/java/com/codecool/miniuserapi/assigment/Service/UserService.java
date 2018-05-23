@@ -6,6 +6,8 @@ import com.codecool.miniuserapi.assigment.Utils.PasswordHashed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -29,5 +31,22 @@ public class UserService {
         String passwordHash = bcrypt.passwordHasher(password);
         User newUser = new User (userName, email, passwordHash, authority);
         userRepository.save(newUser);
+    }
+
+    public List<User> getAllUsers() {
+        List<User> allNews;
+        allNews = userRepository.findAllUserWithGuestRole();
+        return allNews;
+    }
+
+    public boolean deleteUser(int id) {
+        System.out.println("Test2");
+        User userToDelete = userRepository.findById(id);
+        userRepository.delete(userToDelete);
+        if (userRepository.findById(id) == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
