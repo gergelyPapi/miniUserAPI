@@ -14,8 +14,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    PasswordHashed bcrypt = new PasswordHashed();
-
     public User getUserById (Integer id) {
         User userToFind;
         try {
@@ -27,12 +25,6 @@ public class UserService {
         return null;
     }
 
-    public void registerUser (String userName, String email, String password, String authority) {
-        String passwordHash = bcrypt.passwordHasher(password);
-        User newUser = new User (userName, email, passwordHash, authority);
-        userRepository.save(newUser);
-    }
-
     public List<User> getAllUsers() {
         List<User> allNews;
         allNews = userRepository.findAllUserWithGuestRole();
@@ -40,7 +32,6 @@ public class UserService {
     }
 
     public boolean deleteUser(int id) {
-        System.out.println("Test2");
         User userToDelete = userRepository.findById(id);
         userRepository.delete(userToDelete);
         if (userRepository.findById(id) == null) {
