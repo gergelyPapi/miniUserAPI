@@ -10,10 +10,7 @@ public class PasswordHashed {
     }
 
     public Boolean passwordVerifier (String candidate, String hashed) {
-        if (BCrypt.checkpw(candidate, hashed))
-            return true;
-        else
-            return false;
+        return BCrypt.checkpw(candidate, hashed);
     }
 
 }
