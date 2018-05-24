@@ -23,13 +23,9 @@ public class LoginService {
         User currentUser;
         try {
             currentUser = userRepository.findByUserName(userName);
-            if (currentUser != null) {
-                databaseHash = currentUser.getPassword();
-            } else {
-                System.out.println("User was not found");
-                return null;
-            }
+            databaseHash = currentUser.getPassword();
         } catch (NullPointerException e) {
+            System.out.println("User was not found!");
             System.out.println(e.getStackTrace());
             return null;
         }

@@ -3,7 +3,7 @@ package com.codecool.miniuserapi.assigment.Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Mini_user_list")
+@Table(name = "Mini_user_table")
 public class User {
 
     @Id

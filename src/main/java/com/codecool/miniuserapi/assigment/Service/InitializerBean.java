@@ -11,7 +11,6 @@ public class InitializerBean {
         registrationService.registerUser("Test1","test1@mail.com","123", "Guest");
         registrationService.registerUser("Test2","test2@mail.com","1234", "Guest");
         registrationService.registerUser("Test3","test3@mail.com","12345", "Guest");
-        registrationService.registerUser("Test4","test4@mail.com","123456", "Guest");
 
     }
 

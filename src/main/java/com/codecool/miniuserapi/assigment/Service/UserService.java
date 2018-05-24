@@ -34,10 +34,6 @@ public class UserService {
     public boolean deleteUser(int id) {
         User userToDelete = userRepository.findById(id);
         userRepository.delete(userToDelete);
-        if (userRepository.findById(id) == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return userRepository.findById(id) == null;
     }
 }
